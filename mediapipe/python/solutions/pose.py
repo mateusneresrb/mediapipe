@@ -90,7 +90,7 @@ class PoseLandmark(enum.IntEnum):
   RIGHT_FOOT_INDEX = 32
 
 
-_BINARYPB_FILE_PATH = 'mediapipe/modules/pose_landmark/pose_landmark_cpu.binarypb'
+_BINARYPB_FILE_PATH = 'mediapipe/modules/pose_landmark/pose_landmark_gpu.binarypb'
 
 
 def _download_oss_pose_landmark_model(model_complexity):
@@ -163,10 +163,10 @@ class Pose(SolutionBase):
             'use_prev_landmarks': not static_image_mode,
         },
         calculator_params={
-            'posedetectioncpu__TensorsToDetectionsCalculator.min_score_thresh': (
+            'posedetectiongpu__TensorsToDetectionsCalculator.min_score_thresh': (
                 min_detection_confidence
             ),
-            'poselandmarkbyroicpu__tensorstoposelandmarksandsegmentation__ThresholdingCalculator.threshold': (
+            'poselandmarkbyroigpu__tensorstoposelandmarksandsegmentation__ThresholdingCalculator.threshold': (
                 min_tracking_confidence
             ),
         },
