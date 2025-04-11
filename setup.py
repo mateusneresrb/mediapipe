@@ -303,6 +303,11 @@ class BuildModules(build_ext.build_ext):
     bazel_command = [
         'bazel',
         'build',
+        '--config=cuda',
+        '--spawn_strategy=local',
+        '--define=no_gcp_support=true',
+        '--define=no_aws_support=true',
+        '--define=no_nccl_support=true',
         '--compilation_mode=opt',
         '--copt=-DNDEBUG',
         '--action_env=PYTHON_BIN_PATH=' + _normalize_path(sys.executable),
